@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ParkingApp</string>
+    <string name="connected">connected</string>
+    <string name="connect">connect</string>
+</resources>

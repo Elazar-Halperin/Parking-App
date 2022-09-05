@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_white"
+    android:orientation="vertical"
+    tools:context=".ConnectAuth.ConnectAndCreateActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/btn_returnHome"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_gravity="center_vertical|start"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:elevation="0dp"-->
+<!--            android:src="@drawable/arrow_back_ios_24px"-->
+<!--            app:borderWidth="0dp"-->
+<!--            app:elevation="0dp"-->
+<!--            app:fabCustomSize="50sp"-->
+<!--            app:fabSize="normal" />-->
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_auth"/>
+
+</LinearLayout>

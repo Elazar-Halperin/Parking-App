@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1092724526699",
+    "firebase_url": "https://parking-applc-default-rtdb.firebaseio.com",
+    "project_id": "parking-applc",
+    "storage_bucket": "parking-applc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092724526699:android:92fb160020080465d7ab2e",
+        "android_client_info": {
+          "package_name": "com.example.parkingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092724526699-jtdtd56v824gvq4o834bfg1un8n901d3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7ovyNoJOgi6Mz0Xqcgd3JvfrCw2Btvao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092724526699-jtdtd56v824gvq4o834bfg1un8n901d3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ConnectAuth.CreateUserFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardBackgroundColor="@color/white_color"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="20dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Create Account"
+                android:textColor="@color/black_color"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeWidth="0dp"
+                    app:hintTextColor="@color/orange_color"
+                    app:boxStrokeWidthFocused="1dp"
+                    android:layout_margin="8dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart= "10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    android:backgroundTint="@color/background_white"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/background_white"
+                    app:boxStrokeErrorColor="@color/error_color"
+                    android:textColorHint="@color/gray_color"
+                    android:elevation="10dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_nameCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background_white"
+                        android:textColorHint="@color/gray_color"
+                        android:textColor="@color/black_color"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/cursor_color"
+                        android:hint="Name" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeWidth="0dp"
+                    app:hintTextColor="@color/orange_color"
+                    app:boxStrokeWidthFocused="1dp"
+                    android:layout_margin="8dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart= "10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    android:backgroundTint="@color/background_white"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/background_white"
+                    android:textColorHint="@color/gray_color"
+                    app:boxStrokeErrorColor="@color/error_color"
+                    android:elevation="10dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_emailCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background_white"
+                        android:textColor="@color/black_color"
+                        android:textColorHint="@color/gray_color"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/cursor_color"
+                        android:hint="Email" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeWidth="0dp"
+                    app:hintTextColor="@color/orange_color"
+                    app:boxStrokeWidthFocused="1dp"
+                    android:layout_margin="8dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart= "10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    android:backgroundTint="@color/background_white"
+                    android:textColorHint="@color/gray_color"
+
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeColor="@color/background_white"
+                    app:boxStrokeErrorColor="@color/error_color"
+                    android:elevation="10dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_passwordCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background_white"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/cursor_color"
+                        android:textColor="@color/black_color"
+                        android:textColorHint="@color/gray_color"
+                        android:hint="Password" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <Button
+                    android:id="@+id/btn_returnToAccountConnection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Already have an account?"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="@color/orange_color"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_createAccount"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Create account"
+                android:padding="8dp"
+                android:textColor="@color/white_color"
+                android:background="@drawable/rectangle"
+                app:backgroundTint="@color/orange_color"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="32dp"
+                android:elevation="10dp" />
+
+        </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
