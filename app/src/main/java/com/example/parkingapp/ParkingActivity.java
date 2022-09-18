@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.parkingapp.Models.ParkingLotModel;
+import com.example.parkingapp.Models.ParkingModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -19,6 +21,11 @@ public class ParkingActivity extends AppCompatActivity {
 
     LinearLayout ll_parkLeft, ll_parkMiddleFirst, ll_parkMiddleSecond, ll_parkRight;
     List<ImageView> list_parkLeft, list_parkMiddleFirst, list_parkMiddleSecond, list_parkRight;
+
+    ParkingLotModel parkingLotModel;
+    ParkingModel [][][] ThreeDParkingArray;
+
+    final String PARKING_UID = "-NBnHE5xam17oMrdi51X";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +63,6 @@ public class ParkingActivity extends AppCompatActivity {
         for(int i = 0; i < ll_parkMiddleSecond.getChildCount(); i++) {
             list_parkMiddleSecond.add((ImageView) ll_parkMiddleSecond.getChildAt(i));
         }
-
-        list_parkLeft.get(0).setImageDrawable(getDrawable(R.drawable.parking_place_horizontal_green));
-        list_parkLeft.get(0).setTranslationZ(10);
-
-        list_parkRight.get(0).setImageDrawable(getDrawable(R.drawable.parking_place_horizontal_green));
-        list_parkRight.get(0).setTranslationZ(10);
-
-        list_parkMiddleSecond.get(0).setImageDrawable(getDrawable(R.drawable.parking_place_horizontal_green));
-        list_parkMiddleSecond.get(0).setTranslationZ(10);
-
-        list_parkMiddleFirst.get(0).setImageDrawable(getDrawable(R.drawable.parking_place_horizontal_green));
-        list_parkMiddleFirst.get(0).setTranslationZ(10);
 
 
         fab_closePark.setOnClickListener( v -> {

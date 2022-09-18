@@ -23,8 +23,9 @@ public class ConnectUserFragment extends Fragment {
 
     Button btn_createUser, btn_connect;
     TextInputEditText et_email, et_password;
-    FirebaseAuth mAuth;
     LinearLayout ll_progressBar;
+
+    FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
