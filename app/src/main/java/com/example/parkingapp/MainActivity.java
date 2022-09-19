@@ -66,55 +66,54 @@ public class MainActivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-//        List<String> list = new ArrayList<>();
-//        list.add("Closest to the exit");
-//        list.add("Closest to the elevator");
-//        list.add("Disabled parking place");
-//
-//        ArrayAdapter<? extends String> adapter = new ArrayAdapter<>(getApplicationContext(),
-//                R.layout.spinner_item, list);
-//
-//        actv_choice.setAdapter(adapter);
-//        actv_choice.setText(list.get(1));actv_choice.setText(list.get(0));actv_choice.setText(list.get(2));
+        List<String> list = new ArrayList<>();
+        list.add("Closest to the exit");
+        list.add("Closest to the elevator");
+        list.add("Disabled parking place");
+
+        ArrayAdapter<? extends String> adapter = new ArrayAdapter<>(getApplicationContext(),
+                R.layout.spinner_item, list);
+
+        actv_choice.setAdapter(adapter);
+        actv_choice.setText(list.get(1));actv_choice.setText(list.get(0));actv_choice.setText(list.get(2));
 
         // on click listener to search button
         // it will search for a place to park by the user preferences
         btn_searchUser.setOnClickListener(v -> {
             parkingLot = parkingLotModel.getParkingLot();
-            ParkingModel p1 = parkingLot[0][3][2];
-            ParkingModel p2 = parkingLot[1][6][1];
-
-            Log.d("range", String.valueOf(p2.distance(p1)));
-
         });
+    }
+
+
+    private void decideWhatButtonItShouldBe() {
+        String connectivity = "";
+        if(user == null) {
+            connectivity = getString(R.string.connect);
+
+            btn_connectUser.setOnClickListener(v-> {
+                Intent i = new Intent(getApplicationContext(), ConnectAndCreateActivity.class);
+                startActivity(i);
+            });
+
+
+        } else {
+            connectivity = getString(R.string.disconnect);
+
+            btn_connectUser.setOnClickListener(v -> {
+                mAuth.signOut();
+                // when we click sign out, we want to update the onClickListener behaviour,
+                // so we do here to do that.
+                decideWhatButtonItShouldBe();
+            });
+        }
+
+        btn_connectUser.setText(connectivity);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Check if the user is authenticated, if he does then set the text to connected
-        // without any on click listener
-        // if he doesn't then set on click listener which will pass him to authentication activity.
-        if (user != null) {
-            btn_connectUser.setText(R.string.disconnect);
-            btn_connectUser.setOnClickListener(v -> {
-                mAuth.signOut();
-                btn_connectUser.setText(R.string.connect);
-            });
-        } else {
-            btn_connectUser.setText(R.string.connect);
-            btn_connectUser.setOnClickListener(v -> {
-                Intent i = new Intent(getApplicationContext(), ConnectAndCreateActivity.class);
-                startActivity(i);
-            });
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
+        decideWhatButtonItShouldBe();
     }
 
     private void toggleColorStatusBarIcons(Activity activity) {
@@ -170,15 +169,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return null;
-    }
-
-
-    /**
-     * @return the distance from the starting point
-     */
-    private float distance() {
-
-        return 0f;
     }
 
 }
