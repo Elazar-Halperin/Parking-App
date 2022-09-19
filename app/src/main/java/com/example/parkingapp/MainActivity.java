@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.parkingapp.ConnectAuth.ConnectAndCreateActivity;
 import com.example.parkingapp.Fragments.SearchEndDialogFragment;
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         toggleColorStatusBarIcons(MainActivity.this);
 
         // holy shit
+
+        // sets
+        Toast.makeText(getApplicationContext(), "mama the king", Toast.LENGTH_SHORT).show();
+
 
         parkingLotModel = new ParkingLotModel();
 
