@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import kotlinx.coroutines.internal.MainDispatcherFactory;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String UID = "-NBwlYIL7hgoGjHg9P-D";
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // sets the bar icons to dark color.
         toggleColorStatusBarIcons(MainActivity.this);
 
+        // holy shit
 
         parkingLotModel = new ParkingLotModel();
 
