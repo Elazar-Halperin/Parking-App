@@ -35,6 +35,8 @@ public class ParkingModel {
     }
 
     public ParkingModel() {
+        this.takenBy = "";
+        this.type = NULL;
     }
 
     // region getters and setters

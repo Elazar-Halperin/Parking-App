@@ -63,6 +63,7 @@
                     android:layout_height="match_parent"
                     android:hint="Choose"
                     android:inputType="none"
+                    android:focusable="false"
                     android:text="First value here"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

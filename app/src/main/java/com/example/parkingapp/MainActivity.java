@@ -2,7 +2,6 @@ package com.example.parkingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.DialogFragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,12 +32,14 @@ public class MainActivity extends AppCompatActivity {
     Button btn_connectUser, btn_searchUser;
     AutoCompleteTextView actv_choice;
     ParkingModel[][][] parkingLot;
+    ParkingModel entrP;
+    ParkingModel elevP;
 
     DatabaseReference mainRef;
     FirebaseUser user;
     FirebaseAuth mAuth;
 
-    ParkingLotModel parkingLotModel;
+    ParkingLotModel lotModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,17 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "mama the king", Toast.LENGTH_SHORT).show();
 
 
-        parkingLotModel = new ParkingLotModel();
+        lotModel = new ParkingLotModel();
+
+        entrP = new ParkingModel();
+        entrP.setColumn(0);
+        entrP.setRow(0);
+        entrP.setFloor(0);
+
+        elevP = new ParkingModel();
+        elevP.setColumn(1);
+        elevP.setRow(9);
+        elevP.setFloor(0);
 
 
         btn_connectUser = findViewById(R.id.btn_auth);
@@ -75,12 +86,28 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.spinner_item, list);
 
         actv_choice.setAdapter(adapter);
-        actv_choice.setText(list.get(1));actv_choice.setText(list.get(0));actv_choice.setText(list.get(2));
+        actv_choice.setThreshold(0);
+//        actv_choice.setText(list.get(1));actv_choice.setText(list.get(0));actv_choice.setText(list.get(2), false);
 
         // on click listener to search button
         // it will search for a place to park by the user preferences
         btn_searchUser.setOnClickListener(v -> {
-            parkingLot = parkingLotModel.getParkingLot();
+            try {
+                ParkingModel parkingModel;
+                parkingLot = lotModel.getParkingLot();
+                if(actv_choice.getText().toString().trim().equals("Disabled parking place")) {
+                    parkingModel = getHandicappedParkingPlace();
+                } else {
+                    parkingModel = searchForClosest(actv_choice.getText().toString().trim());
+                }
+
+                Toast.makeText(getApplicationContext(), parkingModel.toString(), Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Couldn't find a parking place for you...", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+            SearchEndDialogFragment dialog = new SearchEndDialogFragment();
+            dialog.show(getSupportFragmentManager(), "myFragment");
         });
     }
 
@@ -100,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             connectivity = getString(R.string.disconnect);
 
             btn_connectUser.setOnClickListener(v -> {
-                mAuth.signOut();
+//                mAuth.signOut();
                 // when we click sign out, we want to update the onClickListener behaviour,
                 // so we do here to do that.
                 decideWhatButtonItShouldBe();
@@ -126,19 +153,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ParkingModel getHandicappedParkingPlace() {
-        ParkingModel[][][] parkingLot = parkingLotModel.getParkingLot();
-
+        ParkingModel[][][]parkingLot = lotModel.getParkingLot();
         ParkingModel current = null;
 
+        Log.d("wassup", parkingLot[0][0][0].toString());
+
         for (int i = parkingLot.length - 1; i >= 0; i--) {
-            for (int j = 1; j >= 0; j--) {
+            for (int j = parkingLot[i].length - 2; j < parkingLot[i].length - 1; j++) {
                 for (int k = parkingLot[i][j].length - 1; k >= 0; k--) {
                     ParkingModel temp = parkingLot[i][j][k];
-                    if (temp == null) {
-                        continue;
-                    }
                     if (temp.getStatus() == ParkingModel.NOT_TAKEN && temp.getType() == ParkingModel.HANDICAPPED) {
                         current = temp;
+
                     }
                 }
             }
@@ -149,26 +175,41 @@ public class MainActivity extends AppCompatActivity {
             return current;
         }
 
-        return nearestToTheElevators();
+        return searchForClosest("Closest to the elevator");
 
     }
 
-    private ParkingModel nearestToTheElevators() {
-        for (int i = parkingLot.length - 1; i >= 0; i--) {
-            for (int j = 1; j >= 0; j--) {
-                for (int k = parkingLot[i][j].length - 1; k >= 0; k--) {
-                    ParkingModel temp = parkingLot[i][j][k];
-                    if (temp == null) {
-                        continue;
-                    }
-                    if (temp.getStatus() == ParkingModel.NOT_TAKEN && temp.getType() == ParkingModel.HANDICAPPED) {
 
+    private ParkingModel searchForClosest(String uChoice) {
+        ParkingModel[][][] parkingModels = lotModel.getParkingLot();
+        ParkingModel startP = new ParkingModel();
+        ParkingModel tempP = new ParkingModel();
+        if (uChoice.equals("Closest to the entrance")) {
+            startP = entrP;
+        } else if (uChoice.equals("Closest to the elevator") ) {
+            startP = elevP;
+        }
+
+        //farest parking lot
+        tempP.setFloor(lotModel.getNumberOfFloors() - 1);
+        tempP.setRow(lotModel.getRows() - 2);
+        tempP.setColumn(lotModel.getColumns() - 1);
+
+        for (int k = 0; k < lotModel.getNumberOfFloors(); k++) {
+            for (int i = 0; i < lotModel.getRows() - 1; i++) {
+                for (int j = 0; j < lotModel.getColumns(); j++) {
+                    ParkingModel v = parkingModels[k][i][j];
+                    if ((v.getStatus() == 0) && (startP.distance(tempP) > startP.distance(v))) {
+                        tempP = v;
                     }
                 }
             }
         }
 
-        return null;
+        if(tempP.getStatus()== 0) return tempP;
+
+        return new ParkingModel();
+
     }
 
 }

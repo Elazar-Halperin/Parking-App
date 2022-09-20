@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_gravity="center"
-    android:layout_height="450dp"
+    android:layout_height="wrap_content"
     android:background="@color/background_white">
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="elazar"/>
+        android:orientation="vertical">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_closeDialog"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            app:maxImageSize="24dp"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/close_24px"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:fabCustomSize="40dp"
+            app:tint="@color/gray_color" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_floor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Floor: "
+            android:textSize="16sp"
+            android:layout_margin="8dp"
+            android:textColor="@color/black_color"/>
+
+        <TextView
+            android:id="@+id/tv_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Row: "
+            android:textSize="16sp"
+            android:layout_margin="8dp"
+            android:textColor="@color/black_color"/>
+
+        <TextView
+            android:id="@+id/tv_column"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Column: "
+            android:textSize="16sp"
+            android:layout_margin="8dp"
+            android:textColor="@color/black_color"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="32dp">
+        <Button
+            android:id="@+id/btn_decline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/gray_color"
+            android:text="Decline"/>
+        <Button
+            android:id="@+id/btn_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/orange_color"
+            android:text="Accept"/>
+
+    </LinearLayout>
 </LinearLayout>

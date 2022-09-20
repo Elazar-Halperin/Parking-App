@@ -147,6 +147,7 @@ public class ParkingLotModel {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         ParkingModel parkingModel = snapshot.getValue(ParkingModel.class);
                         floor[x][y] = parkingModel;
+                        Log.d("wassup", parkingModel.toString());
                     }
 
                     @Override
