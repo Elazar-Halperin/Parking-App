@@ -2,6 +2,7 @@ package com.example.parkingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -63,6 +64,21 @@ public class ParkingActivity extends AppCompatActivity {
         for(int i = 0; i < ll_parkMiddleSecond.getChildCount(); i++) {
             list_parkMiddleSecond.add((ImageView) ll_parkMiddleSecond.getChildAt(i));
         }
+        ImageView[][] matrix = new ImageView[9][4];
+        for(int i = 7; i >= 0; i--) {
+            matrix[i][0] = list_parkLeft.get(i);
+            matrix[i][1] = list_parkMiddleFirst.get(i);
+            matrix[i][2] = list_parkMiddleSecond.get(i);
+            matrix[i][3] = list_parkRight.get(i);
+        }
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(MainActivity.PARKING_SPACE_KEY, MODE_PRIVATE);
+
+        int row = sp.getInt(MainActivity.FLOOR_KEY, 0);
+        int column = sp.getInt(MainActivity.COLUMN_KEY, 0);
+
+        matrix[row][column].setBackgroundColor(getResources().getColor(R.color.orange_color));
+        matrix[row][column].setTranslationZ(10);
 
 
         fab_closePark.setOnClickListener( v -> {

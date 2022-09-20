@@ -1,6 +1,8 @@
 package com.example.parkingapp.Models;
 
-public class ParkingModel {
+import java.io.Serializable;
+
+public class ParkingModel implements Serializable {
     public static final int USUAL = 0;
     public static final int HANDICAPPED = 1;
     public static final int NULL = 2;
@@ -40,6 +42,11 @@ public class ParkingModel {
     }
 
     // region getters and setters
+
+
+    public void setTakenBy(String takenBy) {
+        this.takenBy = takenBy;
+    }
 
     public String getTakenBy() {
         return takenBy;
