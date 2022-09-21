@@ -273,6 +273,14 @@
                         android:rotation="180"
                         android:translationZ="0dp"
                         app:srcCompat="@drawable/parking_place_horizontal" />
+<ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-24dp"
+                        android:adjustViewBounds="true"
+                        android:rotation="180"
+                        android:translationZ="0dp"
+                        app:srcCompat="@drawable/parking_place_horizontal" />
 
 
                 </LinearLayout>
@@ -352,6 +360,15 @@
                         android:adjustViewBounds="true"
                         android:translationZ="0dp"
                         app:srcCompat="@drawable/parking_place_horizontal" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-24dp"
+                        android:adjustViewBounds="true"
+                        android:translationZ="0dp"
+                        app:srcCompat="@drawable/parking_place_horizontal" />
+
 
                     <ImageView
                         android:layout_width="match_parent"

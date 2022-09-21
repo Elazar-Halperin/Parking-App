@@ -2,4 +2,9 @@
     <string name="app_name">ParkingApp</string>
     <string name="disconnect">Disconnect</string>
     <string name="connect">connect</string>
+    <string name="release_parking_space">Release parking space</string>
+    <string name="search">search</string>
+    <string name="closest_to_the_entrance">Closest to the entrance</string>
+    <string name="closest_to_the_elevator">Closest to the elevator</string>
+    <string name="handicapped_parking_space">Handicapped parking place</string>
 </resources>

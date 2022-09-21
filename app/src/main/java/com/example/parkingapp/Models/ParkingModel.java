@@ -137,8 +137,8 @@ public class ParkingModel implements Serializable {
     }
 
     private int distanceFromStart() {
-        return ((maxRow * 2 + 2) * (column / 4)
-                + (maxRow * ((column / 2) % 2) * 2)
-                + row * (int) Math.pow(-1, column / 2)) * ((int) Math.pow(10, floor));
+        return (((maxRow )* 2 + 2) * (column / 4)
+                + ((maxRow )* ((column / 2) % 2) * 2)
+                + row * (int) Math.pow(-1, column / 2)) + maxColumn*(maxRow)* floor/2;
     }
 }

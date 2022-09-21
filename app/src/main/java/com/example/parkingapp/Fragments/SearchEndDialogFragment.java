@@ -2,10 +2,12 @@ package com.example.parkingapp.Fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,7 @@ import java.util.Set;
 
 public class SearchEndDialogFragment extends DialogFragment {
 
-    Button btn_decline, btn_accept;
+    Button btn_decline, btn_accept, btn_searchParkingSpace;
     TextView tv_floor, tv_row, tv_column;
     FloatingActionButton fab_closeDialog;
     FirebaseUser user;
@@ -60,6 +62,18 @@ public class SearchEndDialogFragment extends DialogFragment {
         dialog.setContentView(R.layout.dialog_fragment_search_end);
         dialog.setTitle("Elazar THe king|");
 
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    updateStatus(ParkingModel.NOT_TAKEN);
+                    dialog.dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         Window window = dialog.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -67,13 +81,14 @@ public class SearchEndDialogFragment extends DialogFragment {
 
         window.setAttributes(params);
 
-        sp = getActivity().getSharedPreferences(MainActivity.PARKING_SPACE_KEY, Context.MODE_PRIVATE);
+        sp = requireActivity().getSharedPreferences(MainActivity.PARKING_SPACE_KEY, Context.MODE_PRIVATE);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         parkingLotRef = FirebaseDatabase.getInstance().getReference("parking_lots").child(ParkingLotModel.UID).child("floors");
 
         btn_decline = dialog.findViewById(R.id.btn_decline);
         btn_accept = dialog.findViewById(R.id.btn_accept);
+        btn_searchParkingSpace = requireActivity().findViewById(R.id.btn_searchParking);
 
         tv_floor = dialog.findViewById(R.id.tv_floor);
         tv_row = dialog.findViewById(R.id.tv_row);
@@ -137,4 +152,5 @@ public class SearchEndDialogFragment extends DialogFragment {
         editor.putString(MainActivity.TAKEN_BY_KEY, s);
         editor.apply();
     }
+
 }

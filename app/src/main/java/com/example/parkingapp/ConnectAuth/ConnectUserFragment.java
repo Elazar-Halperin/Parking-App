@@ -1,5 +1,6 @@
 package com.example.parkingapp.ConnectAuth;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +19,8 @@ import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class ConnectUserFragment extends Fragment {
 
@@ -74,9 +77,7 @@ public class ConnectUserFragment extends Fragment {
             if(task.isSuccessful()) {
                 // when the task is finished the go back into the MainActivity
                 Toast.makeText(getActivity(), "Connected successfully", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getActivity(), MainActivity.class);
-                startActivity(i);
-                getActivity().finish();
+                requireActivity().finish();
             } else {
                 Toast.makeText(getActivity(), "Failed to connect!", Toast.LENGTH_SHORT).show();
             }

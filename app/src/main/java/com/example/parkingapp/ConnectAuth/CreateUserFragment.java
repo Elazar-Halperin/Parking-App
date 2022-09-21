@@ -1,5 +1,7 @@
 package com.example.parkingapp.ConnectAuth;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.Models.UserModel;
 import com.example.parkingapp.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -147,7 +150,7 @@ public class CreateUserFragment extends Fragment {
                                         // and return to the mainActivity/page.
                                         ll_progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getActivity(), "User Created successfully", Toast.LENGTH_SHORT).show();
-                                        getActivity().finish();
+                                        requireActivity().finish();
                                     } else {
                                         // in case the user created in the auth
                                         // but not in the database, delete the user from the auth.

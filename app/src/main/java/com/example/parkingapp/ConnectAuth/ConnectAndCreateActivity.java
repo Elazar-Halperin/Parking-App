@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 
+import com.example.parkingapp.MainActivity;
 import com.example.parkingapp.R;
 
 public class ConnectAndCreateActivity extends AppCompatActivity {
@@ -32,6 +36,5 @@ public class ConnectAndCreateActivity extends AppCompatActivity {
 
         // Adjust and resize the view when the keyboard opens.
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
     }
 }
