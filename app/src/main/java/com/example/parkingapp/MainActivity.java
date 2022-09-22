@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -90,14 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         sp = getApplicationContext().getSharedPreferences(PARKING_SPACE_KEY, Context.MODE_PRIVATE);
 
-        list = new ArrayList<>();
-        list.add(getString(R.string.closest_to_the_entrance));
-        list.add(getString(R.string.closest_to_the_elevator));
-        list.add(getString(R.string.handicapped_parking_space));
 
-        adapter = new ArrayAdapter<>(MainActivity.this,
-                R.layout.spinner_item,new ArrayList<>(list));
-        actv_choice.setAdapter(adapter);
 
 
         if (user == null) {
@@ -114,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             btn_connectUser.setText(getString(R.string.disconnect));
         }
+
         mAuth.addAuthStateListener(firebaseAuth -> {
 
             if(firebaseAuth.getCurrentUser() == null || firebaseAuth.getCurrentUser().isAnonymous()) {
@@ -147,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), ParkingActivity.class);
                 i.putExtra(ParkingActivity.ROW, sp.getInt(ROW_KEY, 0));
                 i.putExtra(ParkingActivity.COLUMN, sp.getInt(COLUMN_KEY, 0));
+                i.putExtra(ParkingActivity.FLOOR, sp.getInt(FLOOR_KEY, 0));
                 startActivity(i);
                 updateFirebaseDatabase();
 
@@ -176,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
                 b.putSerializable(PARKING_SPACE_KEY, parkingModel);
                 dialog.setArguments(b);
                 dialog.show(getSupportFragmentManager(), "myFragment");
-                Toast.makeText(getApplicationContext(), parkingModel.toString(), Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Parking lot is full...Try again later...", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
@@ -210,6 +205,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        list = Arrays.asList(getResources().getStringArray(R.array.choices));
+
+        adapter = new ArrayAdapter<>(MainActivity.this,
+                R.layout.spinner_item,new ArrayList<>(list));
+        actv_choice.setAdapter(adapter);
+
         if(sp.getString(TAKEN_BY_KEY, null) == null || sp.getString(TAKEN_BY_KEY, null).isEmpty()) {
             btn_searchParkingSpace.setText(R.string.search);
         } else {

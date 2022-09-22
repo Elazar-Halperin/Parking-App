@@ -7,4 +7,10 @@
     <string name="closest_to_the_entrance">Closest to the entrance</string>
     <string name="closest_to_the_elevator">Closest to the elevator</string>
     <string name="handicapped_parking_space">Handicapped parking place</string>
+
+    <string-array name="choices">
+        <item>Closest to the entrance</item>
+        <item>Closest to the elevator</item>
+        <item>Handicapped parking place</item>
+    </string-array>
 </resources>

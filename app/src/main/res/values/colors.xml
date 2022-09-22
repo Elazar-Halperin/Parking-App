@@ -15,5 +15,6 @@
     <color name="error_color">#ff4344</color>
     <color name="gray_color">#858585</color>
     <color name="parking_color">#737373</color>
+    <color name="blue">#1572b5</color>
 <!--    <color name="gray">#818181</color>-->
 </resources>
