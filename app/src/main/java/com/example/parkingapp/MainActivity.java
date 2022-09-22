@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             ParkingModel parkingModel;
             try {
                 parkingLot = lotModel.getParkingLot();
-                if (actv_choice.getText().toString().trim().equals("Disabled parking place")) {
+                if (actv_choice.getText().toString().trim().equals(getString(R.string.handicapped_parking_space))) {
                     parkingModel = getHandicappedParkingPlace();
                 } else {
                     parkingModel = searchForClosest(actv_choice.getText().toString().trim());
