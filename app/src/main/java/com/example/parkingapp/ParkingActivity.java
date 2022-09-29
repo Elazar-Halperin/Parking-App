@@ -133,7 +133,7 @@ public class ParkingActivity extends AppCompatActivity {
                                     ParkingModel pm = snapshot.getValue(ParkingModel.class);
                                     if(pm.getStatus() == ParkingModel.TAKEN || pm.getStatus() == ParkingModel.RESERVED) {
                                         matrix[finalI][finalJ].setColorFilter(getResources().getColor(R.color.error_color));
-                                        matrix[finalI][finalJ].setTranslationZ(114f);
+                                        matrix[finalI][finalJ].setTranslationZ(10f);
                                     } else {
                                         matrix[finalI][finalJ].setColorFilter(getResources().getColor(R.color.white_color));
                                     }

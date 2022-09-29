@@ -159,11 +159,18 @@ public class MainActivity extends AppCompatActivity {
             ParkingModel parkingModel;
             try {
                 parkingLot = lotModel.getParkingLot();
-                if (actv_choice.getText().toString().trim().equals(getString(R.string.handicapped_parking_space))) {
+                String choice = actv_choice.getText().toString().trim();
+                if(choice.equals(getString(R.string.pick_a_parking_space))) {
+                    Toast.makeText(getApplicationContext(), "Pls pick a parking space before searching...", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (choice.equals(getString(R.string.handicapped_parking_space))) {
                     parkingModel = getHandicappedParkingPlace();
                 } else {
-                    parkingModel = searchForClosest(actv_choice.getText().toString().trim());
+                    parkingModel = searchForClosest(choice);
                 }
+
+
                 putValuesIntoSP(parkingModel);
 
                 SearchEndDialogFragment dialog = new SearchEndDialogFragment();
@@ -278,33 +285,80 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+//    private ParkingModel searchForClosest(String uChoice) {
+//        ParkingModel[][][] parkingModels = lotModel.getParkingLot();
+//        ParkingModel startP = new ParkingModel();
+//        ParkingModel tempP = new ParkingModel();
+//        if (uChoice.equals(getString(R.string.closest_to_the_entrance))) {
+//            startP = entrP;
+//        } else if (uChoice.equals(getString(R.string.closest_to_the_elevator))) {
+//            startP = elevP;
+//        }
+//
+//        tempP.setFloor(lotModel.getNumberOfFloors() - 1);
+//        tempP.setRow(lotModel.getRows() - 2);
+//        tempP.setColumn(lotModel.getColumns() - 1);
+//
+//        for (int k = 0; k < lotModel.getNumberOfFloors(); k++) {
+//            for (int i = 0; i < lotModel.getRows() - 1; i++) {
+//                for (int j = 0; j < lotModel.getColumns(); j++) {
+//                    ParkingModel v = parkingModels[k][i][j];
+//                    if (v.getType() == ParkingModel.USUAL && (v.getStatus() == ParkingModel.NOT_TAKEN) && (startP.distance(tempP) > startP.distance(v))) {
+//                        tempP = v;
+//                    }
+//                }
+//            }
+//        }
+//
+//        if (tempP.getStatus() == 0) return tempP;
+//        return new ParkingModel();
+//        return null;
+//    }
+
+
+
+    //   ///////////קרובה  פנויה לפי בחירת לקוח
     private ParkingModel searchForClosest(String uChoice) {
-        ParkingModel[][][] parkingModels = lotModel.getParkingLot();
-        ParkingModel startP = new ParkingModel();
+        Log.d("uChoice", uChoice);
         ParkingModel tempP = new ParkingModel();
+        ParkingModel maxTemp = new ParkingModel();
+        ParkingModel[][][] shit = lotModel.getParkingLot();
+        ParkingModel tempMin = shit[0][0][0];//רחוק ביותר
+        tempP = entrP;
         if (uChoice.equals(getString(R.string.closest_to_the_entrance))) {
-            startP = entrP;
-        } else if (uChoice.equals(getString(R.string.closest_to_the_elevator))) {
-            startP = elevP;
+            tempP = entrP;
+            Log.d("bruh", "bruh");
+            return tempP.SFC(parkingLot);
         }
+        Log.d("outside", "ooga booaga");
+        if (uChoice.equals("Closest to the elevator")) {
+            //tempP = shit[][][];
+            int distMin=ParkingModel.maxColumn*ParkingModel.maxRow*ParkingModel.maxFloor;
 
-        tempP.setFloor(lotModel.getNumberOfFloors() - 1);
-        tempP.setRow(lotModel.getRows() - 2);
-        tempP.setColumn(lotModel.getColumns() - 1);
+            for (int k = 0; k <ParkingModel.maxFloor ; k++) {
+                //Log.d("inside_j", String.valueOf(j));
 
-        for (int k = 0; k < lotModel.getNumberOfFloors(); k++) {
-            for (int i = 0; i < lotModel.getRows() - 1; i++) {
-                for (int j = 0; j < lotModel.getColumns(); j++) {
-                    ParkingModel v = parkingModels[k][i][j];
-                    if (v.getType() == ParkingModel.USUAL && (v.getStatus() == ParkingModel.NOT_TAKEN) && (startP.distance(tempP) > startP.distance(v))) {
-                        tempP = v;
+                ParkingModel v ;
+                for (int j = 0; j < ParkingModel.maxColumn; j++){
+                    v = shit[k][ParkingModel.maxRow - 1][j];
+                    v.setRow(ParkingModel.maxRow - 1);
+                    Log.d( "inIf","j = " + j + " k = " + k + " v =" + v.toString() +"\n" +"v.SGC:"+v.SFC(shit).toString()+" \n   \\\\\\dist: " + v.SFC(shit).distance(v) +"||"+tempMin.distance(v)+"\n \n");
+                    if ((v.SFC(shit).getStatus()==ParkingModel.NOT_TAKEN)&&(v.SFC(shit).distance(v) <distMin)) {
+                        Log.d("tempMin", tempMin.toString()+"  dist temp to v:"+tempMin.distance(v)+"\n"+v.SFC(shit).toString()+" dist shit to v:"+v.SFC(shit).distance(v));
+                        tempMin = v.SFC(shit);
+                        distMin= v.SFC(shit).distance(v);
+
                     }
+
                 }
             }
+            return tempMin;
         }
-
-        if (tempP.getStatus() == 0) return tempP;
-        return new ParkingModel();
+//
+//        }
+            Log.d("elevNULL", tempP.toString());
+           if (tempP.getStatus() == 0) return tempP;
+                return new ParkingModel();
+        }
     }
 
-}

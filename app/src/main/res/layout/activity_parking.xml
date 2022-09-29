@@ -248,11 +248,12 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:scaleX="0.7"
+                        android:rotationX="180"
+                        android:layout_marginRight="-20dp"
                         android:adjustViewBounds="true"
-                        android:rotation="180"
-                        app:tint="@color/blue"
                         android:translationZ="0dp"
-                        app:srcCompat="@drawable/parking_place_horizontal_green" />
+                        app:srcCompat="@drawable/parking_place_handicapped" />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -352,11 +353,12 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:scaleX="0.7"
+                        android:rotation="180"
+                        android:layout_marginLeft="-20dp"
                         android:adjustViewBounds="true"
-                        app:tint="@color/blue"
-
                         android:translationZ="0dp"
-                        app:srcCompat="@drawable/parking_place_horizontal" />
+                        app:srcCompat="@drawable/parking_place_handicapped" />
 
                     <ImageView
                         android:layout_width="match_parent"

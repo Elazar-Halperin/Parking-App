@@ -1,5 +1,7 @@
 package com.example.parkingapp.Models;
 
+import android.util.Log;
+
 import java.io.Serializable;
 
 public class ParkingModel implements Serializable {
@@ -9,6 +11,7 @@ public class ParkingModel implements Serializable {
 
     public static final int maxRow = 10;
     public static final int maxColumn = 4;
+    public static final int maxFloor = 3;
 
 
     public static final int NOT_TAKEN = 0;
@@ -136,9 +139,44 @@ public class ParkingModel implements Serializable {
         return Math.abs(this.distanceFromStart() - parkingModel.distanceFromStart());
     }
 
-    private int distanceFromStart() {
+    public int distanceFromStart() {
         return (((maxRow )* 2 + 2) * (column / 4)
                 + ((maxRow )* ((column / 2) % 2) * 2)
                 + row * (int) Math.pow(-1, column / 2)) + maxColumn*(maxRow)* floor/2;
+    }
+
+    public ParkingModel SFC(ParkingModel[][][] parkingModels){
+        ParkingModel startP = new ParkingModel();
+        ParkingModel tempP = new ParkingModel();//רחוק ביותר
+        tempP.setFloor(maxFloor - 1);
+        tempP.setRow(maxRow - 2);
+        tempP.setColumn(maxColumn - 1);
+        startP = this;
+
+        Log.d("SFC_startP", startP.toString());
+
+
+        //searching for closest ללא תנאי מהתחלה
+        for (int k = 0; k < maxFloor; k++) {
+            for (int i = 0; i < maxRow - 1; i++) {
+                for (int j = 0; j < maxColumn; j++) {
+                    ParkingModel v = parkingModels[k][i][j];
+
+                    if (v.getType() == ParkingModel.USUAL && ((v.getStatus() == ParkingModel.NOT_TAKEN))
+                            && (startP.distance(tempP) > startP.distance(v))) {
+                        tempP = v;
+                        //if(k == 2 && i == 8 && j==3) {
+                            Log.d("shit283", tempP.toString());
+
+                    }
+                }
+            }
+        }
+        tempP.setStatus(parkingModels[tempP.getFloor()][tempP.getRow()][tempP.getColumn()].getStatus());
+        tempP.setTakenBy(parkingModels[tempP.getFloor()][tempP.getRow()][tempP.getColumn()].getTakenBy());
+        Log.d("SFC_tempP", tempP.toString());
+        if (tempP.getStatus() == 0) return tempP;
+        
+        return new ParkingModel();
     }
 }
